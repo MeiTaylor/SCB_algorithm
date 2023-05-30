@@ -1,6 +1,11 @@
 import os
 import openai
 import re  # 导入正则表达式模块
+import sys
+import time
+import json
+
+
 
 os.environ["http_proxy"] = "http://127.0.0.1:7890"
 os.environ["https_proxy"] = "http://127.0.0.1:7890" 
@@ -16,12 +21,19 @@ openai.api_key = "sk-"
 
 
 # 打开文件并读取内容
-with open('1.txt', 'r', encoding='utf-8') as file: 
+with open('E:\\softbei\\code\\txt\\45.txt', 'r', encoding='utf-8') as file: 
     resume_text = file.read()
 
 # 读取txt文件
-with open('requirements.txt', 'r', encoding='utf-8') as file:
+with open('E:\\softbei\\code\\requirements.txt', 'r', encoding='utf-8') as file:
     system_message = file.read().replace('\n', '')
+
+
+# resume_text = sys.argv[1]  # Get the first argument passed from the C# code
+# system_message = sys.argv[2]  # Get the second argument passed from the C# code
+
+
+
 
 
 message = [
@@ -43,8 +55,8 @@ response = openai.ChatCompletion.create(
 
 # response = response['choices'][0]['message']['content']
 # response = response['choices'][0]['text']
-print(response)
-print(response['choices'][0]['message']['content'])
+#print(response)
+#print(response['choices'][0]['message']['content'])
 
 
 answer = response['choices'][0]['message']['content']
@@ -88,5 +100,10 @@ if "工作总时间" in resume_info:
         resume_info["工作总时间"] = int(years_match.group(1)) + 1  # Convert the work years string to an integer
 
 
-for key, value in resume_info.items():
-    print(f"{key}: {value}")
+# for key, value in resume_info.items():
+#     print(f"{key}: {value}")
+
+
+# Convert the resume_info dictionary to a JSON string
+json_str = json.dumps(resume_info)
+print(json_str)
