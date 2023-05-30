@@ -7,11 +7,11 @@ os.environ["https_proxy"] = "http://127.0.0.1:7890"
 
 
 # os.environ["OPENAI_API_BASE"]="https://api.openai.com"
-# openai.api_key = "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"
+# openai.api_key = "sk-"
 
 openai.api_base="https://textai.buzz/v1"
 # os.environ["OPENAI_API_BASE"]="https://aigptx.top/"
-openai.api_key = "sk-u8j2G5joxfKnPZ9uOs1UJXZZccB9Xlgt6FUnkqXWIjQEWquh"
+openai.api_key = "sk-"
 
 
 
