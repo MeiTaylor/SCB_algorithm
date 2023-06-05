@@ -11,24 +11,30 @@ namespace open
     {
         static void Main(string[] args)
         {
-            string filepath = @"E:\softbei\code";
-            int n = 3;
+            string filepath = @"E:\softbei\code\txt";
+            int n = 61;
 
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = @"D:\study\Anaconda\install\relate\envs\open\python.exe";
             start.Arguments = string.Format("{0} \"{1}\" {2}", @"E:\softbei\code\chat.py", filepath, n);
+            //start.UseShellExecute = true;
+
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
+
+            Console.WriteLine(start.Arguments);
+
 
             using (Process process = Process.Start(start))
             {
                 using (StreamReader reader = process.StandardOutput)
                 {
                     string result = reader.ReadToEnd();
-                    //Console.WriteLine(result);
+                    Console.WriteLine(result);
 
                     // 把输出的JSON字符串转换成一个字典
                     Dictionary<string, object> resumeInfo = JsonConvert.DeserializeObject<Dictionary<string, object>>(result);
+
 
                     // 输出字典中的每一项
                     foreach (KeyValuePair<string, object> item in resumeInfo)
