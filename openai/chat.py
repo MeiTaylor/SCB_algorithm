@@ -8,24 +8,24 @@ import json
 
 # 读取命令行参数
 
-# filepath = sys.argv[1]
-# n = sys.argv[2]
+filepath = sys.argv[1]
+n = sys.argv[2]
 
-# # # print(filepath)
-# filename = os.path.join(filepath, f'{n}.txt')
-# # # print(filename)
+# # print(filepath)
+filename = os.path.join(filepath, f'{n}.txt')
+# # print(filename)
 
-filename = 'E:\\softbei\\code\\1.txt'
+# filename = 'E:\\softbei\\code\\1.txt'
 
 os.environ["http_proxy"] = "http://127.0.0.1:7890"
 os.environ["https_proxy"] = "http://127.0.0.1:7890" 
 
 os.environ["OPENAI_API_BASE"]="https://api.openai.com"
-openai.api_key = "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"
+openai.api_key = "sk-"
 
 # openai.api_base="https://textai.buzz/v1"
 # # os.environ["OPENAI_API_BASE"]="https://aigptx.top/"
-# openai.api_key = "sk-TCNmJpFTLiGW0xVVH6GDmaBs7LpL1jpIrm5P2nZPagrQ3R2y"
+# openai.api_key = "sk-"
 
 # 打开文件并读取内容
 with open(filename, 'r', encoding='utf-8') as file: 
@@ -53,23 +53,7 @@ response = openai.ChatCompletion.create(
 )
 
 answer = response['choices'][0]['message']['content']
-# print(answer)
-
-
-
-# 查找第一个 '{' 的位置
-start_index = answer.find('{')
-
-# 如果找到了 '{'，则删除 '{' 前面的所有字符
-if start_index != -1:
-    answer = answer[start_index:]
-
-
-# 将字符串转换为 JSON 格式
-json_data = json.loads(answer)
-
-# 打印 JSON 数据
-print(json_data)
+print(answer)
 
 
 
