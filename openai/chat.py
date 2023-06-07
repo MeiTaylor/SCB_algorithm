@@ -4,35 +4,65 @@ import re  # 导入正则表达式模块
 import sys
 import time
 import json
+import docx2txt
+
+
+def docx_to_txt(input_docx_file, output_txt_file):
+    # 使用docx2txt库读取docx文件内容
+    text = docx2txt.process(input_docx_file)
+
+    # 删除重复行
+    lines = text.split('\n')
+    unique_lines = []
+    for line in lines:
+        if line not in unique_lines:
+            unique_lines.append(line)
+    text = '\n'.join(unique_lines)
+
+    # 将读取到的问题内容写入txt文件
+    with open(output_txt_file, 'w', encoding='utf-8') as file:
+        file.write(text)
+
 
 
 # 读取命令行参数
 
-filepath = sys.argv[1]
-n = sys.argv[2]
+# filepath = sys.argv[1]
+# n = sys.argv[2]
 
-# # print(filepath)
-filename = os.path.join(filepath, f'{n}.txt')
-# # print(filename)
+# # # # print(filepath)
+# # filename = os.path.join(filepath, f'{n}.txt')
+# # # # print(filename)
 
-# filename = 'E:\\softbei\\code\\1.txt'
+filename = 'E:\\softbei\\code\\txt\\1.txt'
+
+
+
+# # Convert docx to txt
+# input_docx_file = os.path.join(filepath, f'{n}.docx')
+
+# output_txt_file = os.path.join(filepath, f'{n}.txt')
+# docx_to_txt(input_docx_file, output_txt_file)
+
+# filename = os.path.join(filepath, f'{n}.txt')
+
 
 os.environ["http_proxy"] = "http://127.0.0.1:7890"
 os.environ["https_proxy"] = "http://127.0.0.1:7890" 
 
 os.environ["OPENAI_API_BASE"]="https://api.openai.com"
-openai.api_key = "sk-"
+# openai.api_key = "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"
+# openai.api_key = "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"
+openai.api_key = "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"
 
 # openai.api_base="https://textai.buzz/v1"
 # # os.environ["OPENAI_API_BASE"]="https://aigptx.top/"
-# openai.api_key = "sk-"
+# openai.api_key = "sk-TCNmJpFTLiGW0xVVH6GDmaBs7LpL1jpIrm5P2nZPagrQ3R2y"
 
 # 打开文件并读取内容
 with open(filename, 'r', encoding='utf-8') as file: 
     resume_text = file.read()
-# 如果 system_message 超过 3000 个字符，截取前 3000 个字符
-if len(resume_text) > 3000:
-    system_message = str(resume_text)[:3000]
+
 # 读取txt文件
 with open('E:\\softbei\\code\\prompt.txt', 'r', encoding='utf-8') as file:
     system_message = file.read().replace('\n', '')
